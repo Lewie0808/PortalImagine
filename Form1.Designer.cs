@@ -149,7 +149,7 @@
             this.firmUrlTxtbx.Name = "firmUrlTxtbx";
             this.firmUrlTxtbx.Size = new System.Drawing.Size(235, 20);
             this.firmUrlTxtbx.TabIndex = 11;
-            this.firmUrlTxtbx.Text = "http";
+            this.firmUrlTxtbx.Text = "https://";
             this.firmUrlTxtbx.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // urlLbl
