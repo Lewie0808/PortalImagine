@@ -1,7 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Portal
@@ -55,25 +53,57 @@ namespace Portal
 
         private void CopyBtn_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(firmNameTxtbx.Text))
+            {
+                MessageBox.Show("Please add firm name", "Firmname", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                this.Close();
+            }
+            else
+            {
+                File.WriteAllText(@"C:\Portal\client\config.js", File.ReadAllText(@"C:\Portal\client\config.js").Replace("One Advanced", firmNameTxtbx.Text));
+            }
+            
+            if (string.IsNullOrWhiteSpace(firmUrlTxtbx.Text))
+            {
+                MessageBox.Show("Please add Url Address", "URLAddress", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                this.Close();
+            }
+            else
+            {
+                File.WriteAllText(@"C:\Portal\client\config.js", File.ReadAllText(@"C:\Portal\client\config.js").Replace("https://www.oneadvanced.com/", firmUrlTxtbx.Text));
+            }
+            
+            if (string.IsNullOrWhiteSpace(BrndLocTxtBox.Text))
+            {
+                MessageBox.Show("Please add Brand Logo", "BrandLogo", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                this.Close();
+            }
+            else
+            {
+                string brnSourcePath = BrndLocTxtBox.Text;
+                string brndestinationPath = @"C:\Portal\Client\img\";
+                string brndestinationFilename = "brand_logo.png";
+                string brnSourceFile = System.IO.Path.GetFullPath(brnSourcePath);
+                string brndestinationFile = System.IO.Path.Combine(brndestinationPath, brndestinationFilename);
 
-            File.WriteAllText(@"C:\Portal\client\config.js", File.ReadAllText(@"C:\Portal\client\config.js").Replace("One Advanced", firmNameTxtbx.Text));
-            File.WriteAllText(@"C:\Portal\client\config.js", File.ReadAllText(@"C:\Portal\client\config.js").Replace("https://www.oneadvanced.com/", firmUrlTxtbx.Text));
+                System.IO.File.Copy(brnSourceFile, brndestinationFile, true);
+            }
+            
+            if (string.IsNullOrWhiteSpace(CmpLocTxtBox.Text))
+            {
+                MessageBox.Show("Please add Company Logo", "BrandLogo", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                this.Close();
+            }
+            else
+            {
+                string cmpSourcePath = CmpLocTxtBox.Text;
+                string cmpdestinationPath = @"C:\Portal\Client\img\";
+                string cmpdestinationFilename = "company_logo.png";
+                string cmpsourceFile = System.IO.Path.GetFullPath(cmpSourcePath);
+                string cmpdestinationFile = System.IO.Path.Combine(cmpdestinationPath, cmpdestinationFilename);
 
-            string brnSourcePath = BrndLocTxtBox.Text;
-            string brndestinationPath = @"C:\Portal\Client\img\";
-            string brndestinationFilename = "brand_logo.png";
-            string brnSourceFile = System.IO.Path.GetFullPath(brnSourcePath);
-            string brndestinationFile = System.IO.Path.Combine(brndestinationPath, brndestinationFilename);
-
-            string cmpSourcePath = CmpLocTxtBox.Text;
-            string cmpdestinationPath = @"C:\Portal\Client\img\";
-            string cmpdestinationFilename = "company_logo.png";
-            string cmpsourceFile = System.IO.Path.GetFullPath(cmpSourcePath);
-            string cmpdestinationFile = System.IO.Path.Combine(cmpdestinationPath, cmpdestinationFilename);
-           
-            System.IO.File.Copy(brnSourceFile, brndestinationFile, true);
-                                    
-            System.IO.File.Copy(cmpsourceFile, cmpdestinationFile, true);
+                System.IO.File.Copy(cmpsourceFile, cmpdestinationFile, true);
+            }
 
             MessageBox.Show("Name, URL, Logo's changed", "Copy", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
          }
@@ -85,7 +115,7 @@ namespace Portal
             System.IO.File.Copy(@"C:\Portal\Client\img\Original\company_logo.png", @"C:\Portal\Client\img\company_logo.png", true);
 
             //Change company back to One Advanced
-
+            
             string textName = File.ReadAllText(@"C:\Portal\client\config.js");
 
             var firmnameString = "var FIRMNAME = '";
@@ -100,7 +130,7 @@ namespace Portal
             textName = textName.Replace(theStringName, newValueName);
 
             File.WriteAllText(@"C:\Portal\client\config.js", textName);
-
+            
             //Change company URL to One Advanced
 
             string textUrl = File.ReadAllText(@"C:\Portal\client\config.js");
@@ -118,7 +148,7 @@ namespace Portal
 
             File.WriteAllText(@"C:\Portal\client\config.js", textUrl);
 
-            MessageBox.Show("Reverted back", "Revert", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            MessageBox.Show("Defaulted to One Advanced", "Revert", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
     }
