@@ -132,20 +132,20 @@ namespace Portal
             File.WriteAllText(@"C:\Portal\client\config.js", textName);
             
             //Change company URL to One Advanced
-
+                                 
             string textUrl = File.ReadAllText(@"C:\Portal\client\config.js");
-
+                        
             var firmUrlString = "var FIRMURL = '";
             int pUrl = textUrl.IndexOf(firmUrlString) + firmUrlString.Length;
 
             string rest = textUrl.Substring(pUrl, textUrl.Length - pUrl);
             int lengthOfStringUrl = rest.IndexOf("'");
-
+         
             string theStringUrl = textUrl.Substring(pUrl, lengthOfStringUrl);
             var newValueUrl = "https://www.oneadvanced.com/";
-
+                
             textUrl = textUrl.Replace(theStringUrl, newValueUrl);
-
+            
             File.WriteAllText(@"C:\Portal\client\config.js", textUrl);
 
             MessageBox.Show("Defaulted to One Advanced", "Revert", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
