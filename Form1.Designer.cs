@@ -230,7 +230,7 @@
             this.Controls.Add(this.RevertBtn);
             this.Controls.Add(this.CopyBtn);
             this.Name = "Form1";
-            this.Text = "Portal Imagine Change";
+            this.Text = "Portal Image Change";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Rename.ResumeLayout(false);
             this.Rename.PerformLayout();

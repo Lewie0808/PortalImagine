@@ -182,8 +182,7 @@ namespace Portal
                 s = s + " " + File;
             BrndLocTxtBox.Text = s;
         }
-
-        
+                
         private void CmpLocTxtBox_DragEnter(object sender, DragEventArgs e)
     {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
